@@ -3,7 +3,7 @@ import './Styles/theme.css';
 import { Heading } from './components/Heading';
 
 export function App() {
-  console.log('oi');
+  console.log('tudo deu certo');
 
   return (
     <>
