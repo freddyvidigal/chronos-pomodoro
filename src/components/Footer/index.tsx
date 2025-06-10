@@ -1,9 +1,14 @@
 import styles from './styles.module.css';
 
-type FooterProps = {
-  children: React.ReactNode;
-};
-
-export function Footer({ children }: FooterProps) {
-  return <h1 className={styles.footer}>{children}</h1>;
+export function Footer() {
+  return (
+    <footer className={styles.footer}>
+      <a href='http://' target='_blank' rel='noopener noreferrer'>
+        Entenda como funciona a técnica pomodoro
+      </a>
+      <a href='http://' target='_blank' rel='noopener noreferrer'>
+        Chronos Pomodoro &copy;{new Date().getFullYear()} -feito com amor
+      </a>
+    </footer>
+  );
 }
