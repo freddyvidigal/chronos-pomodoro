@@ -1,15 +1,16 @@
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
-import { Cycles } from '../components/Cycles';
-import { DefaultButton } from '../components/DefaultButton';
-import { DefaultInput } from '../components/DefaultInput';
+import { Cycles } from '../Cycles';
+import { DefaultButton } from '../DefaultButton';
+import { DefaultInput } from '../DefaultInput';
 import { useRef } from 'react';
-import type { TaskModel } from '../models/TaskModel';
-import { useTaskContext } from '../contexts/TaskContext/useTaskContext';
-import { getNextCycle } from '../utils/getNextCycle';
-import { getNextCycleType } from '../utils/getNextCycleType';
+import type { TaskModel } from '../../models/TaskModel';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 
-import { TaskActionTypes } from '../contexts/TaskContext/taskActions';
-import { Tips } from '../components/Tips';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
+import { TimerWorkerManager } from '../../workers/TimerWorkerManager';
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
@@ -37,6 +38,17 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+
+    const worker = TimerWorkerManager.getInstance();
+
+    worker.postMessage('FAVOR'); // Sim, posso fazer um favor
+    worker.postMessage('FALA_OI'); // OK: OI!
+    worker.postMessage('BLALBLA'); // Não entendi!
+    worker.postMessage('FECHAR'); // Tá bom, vou fechar
+
+    worker.onmessage = function (event) {
+      console.log('PRINCIPAL recebeu:', event.data);
+    };
   }
   function handleInterruptTask() {
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
