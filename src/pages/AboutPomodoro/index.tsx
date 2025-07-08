@@ -1,6 +1,6 @@
 import { GenericHtml } from '../../components/GenericHtml';
 import { Heading } from '../../components/Heading';
-import { MainTemplate } from '../../components/templates/MainTemplate';
+import { MainTemplate } from '../../templates/MainTemplate';
 
 export function AboutPomodoro() {
   return (
